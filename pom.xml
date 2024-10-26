@@ -15,6 +15,8 @@
 
         <telegrambots.version>6.9.7.1</telegrambots.version>
         <discord4j.version>3.2.6</discord4j.version>
+        <reactor.netty.http>1.1.23</reactor.netty.http>
+        <jackson.databind>2.18.0</jackson.databind>
     </properties>
 
     <dependencies>
@@ -43,6 +45,20 @@
                 <groupId>com.discord4j</groupId>
                 <artifactId>discord4j-core</artifactId>
                 <version>${discord4j.version}</version>
+            </dependency>
+
+            <!-- Зависимости, устраняющие уязвимости в транзитивных библиотеках -->
+
+            <dependency>
+                <groupId>io.projectreactor.netty</groupId>
+                <artifactId>reactor-netty-http</artifactId>
+                <version>${reactor.netty.http}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.databind}</version>
             </dependency>
 
         </dependencies>
