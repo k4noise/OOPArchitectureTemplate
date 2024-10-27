@@ -8,7 +8,7 @@ class MessageProcessorTest {
     @Test
     void testGetRepeatable() {
         String message = "Привет";
-        String expectedMessage = "Ваше сообщение: '" + message + "'";
+        String expectedMessage = String.format("Ваше сообщение: '%s'", message);
         Assertions.assertEquals(expectedMessage, new MessageProcessor().processRepeatable(message));
     }
 }

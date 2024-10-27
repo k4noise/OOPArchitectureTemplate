@@ -10,6 +10,6 @@ public class MessageProcessor {
      * @return Сообщение пользователя с меткой
      */
     public String processRepeatable(String message) {
-        return "Ваше сообщение: '" + message + "'";
+        return String.format("Ваше сообщение: '%s'", message);
     }
 }
