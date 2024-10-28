@@ -13,11 +13,18 @@ import discord4j.core.object.entity.channel.MessageChannel;
  */
 public class DiscordBot {
 
+    /** Токен, отвечающий за управление ботом */
     private final String token;
+    /** Обработчик пользовательских сообщений */
     private final MessageProcessor messageProcessor;
-
+    /** Клиент для работы с Дискорд */
     private GatewayDiscordClient client;
 
+    /**
+     * Создает дискорд бота
+     * @param token Токен для бота
+     * @param messageProcessor Обработчик пользовательских сообщений
+     */
     public DiscordBot(String token, MessageProcessor messageProcessor) {
         this.token = token;
         this.messageProcessor = messageProcessor;
