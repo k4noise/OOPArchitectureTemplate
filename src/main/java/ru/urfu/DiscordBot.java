@@ -9,17 +9,30 @@ import discord4j.core.object.entity.channel.MessageChannel;
 
 /**
  * Дискорд бот
+ * Текущая реализация отвечает пользователю его же сообщением с небольшой припиской
  */
 public class DiscordBot {
 
+    /** Токен, отвечающий за управление ботом */
     private final String token;
-
+    /** Обработчик пользовательских сообщений */
+    private final MessageProcessor messageProcessor;
+    /** Клиент для работы с Дискорд */
     private GatewayDiscordClient client;
 
-    public DiscordBot(String token) {
+    /**
+     * Создает дискорд бота
+     * @param token Токен для бота
+     * @param messageProcessor Обработчик пользовательских сообщений
+     */
+    public DiscordBot(String token, MessageProcessor messageProcessor) {
         this.token = token;
+        this.messageProcessor = messageProcessor;
     }
 
+    /**
+     * Запустить бота
+     */
     public void start() {
         client = DiscordClient.create(token).login().block();
         if (client == null) {
@@ -34,7 +47,7 @@ public class DiscordBot {
                     if (eventMessage.getAuthor().map(user -> !user.isBot()).orElse(false)) {
                         String chatId = eventMessage.getChannelId().asString();
                         String messageFromUser = eventMessage.getContent();
-                        // TODO обработайте сообщение от пользователя (messageFromUser)
+                        sendMessage(chatId, messageProcessor.processRepeatable(messageFromUser));
                     }
                 });
         System.out.println("Discord бот запущен");
